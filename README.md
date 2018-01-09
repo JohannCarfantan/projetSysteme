@@ -18,3 +18,5 @@ fonction1(i);
 ```
 
 ### fonction2(args) :
+
+Par Johann Carfantan et Julien Gestin
