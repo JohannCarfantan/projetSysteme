@@ -10,8 +10,7 @@ Le binôme est constitué de :
 - shell.c : 
 
 # Rôle et utilisation de chaque fonction
-
-- shell.c :
--- fonction1(args) :
---- rôle : but de la fonction
---- exemple d'utilisation : fonction1(i);
+### shell.c :
+- fonction1(args) :
+ - rôle : but de la fonction
+ - exemple d'utilisation : fonction1(i);
