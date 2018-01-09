@@ -12,6 +12,6 @@ Le binôme est constitué de :
 # Rôle et utilisation de chaque fonction
 
 - shell.c :
- - fonction1(args) :
-  - rôle : but de la fonction
-  - exemple d'utilisation : fonction1(i);
+-- fonction1(args) :
+--- rôle : but de la fonction
+--- exemple d'utilisation : fonction1(i);
