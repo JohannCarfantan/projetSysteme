@@ -19,6 +19,5 @@ fonction1(i);
 
 ### fonction2(args) :
 
-test
 Par Johann Carfantan et Julien Gestin 
 dans le cadre de la formation IMR première année à l'ENSSAT
