@@ -11,8 +11,10 @@ Le binôme est constitué de :
 
 # Rôle et utilisation de chaque fonction
 ### fonction1(args) :
-- rôle : but de la 'fonction1'
+- rôle : but de la `fonction1`
 - exemple d'utilisation : 
-'''c
+```c
 fonction1(i);
-'''
+```
+
+### fonction2(args) :
