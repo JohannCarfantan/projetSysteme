@@ -23,6 +23,9 @@ int main (int argc, char *argv[]) {
     printf ("Programmation Syst�me Windows - IMR 1\n");
     fflush (stdout);
   }
+  else{
+    printf ("2 args");
+  }
 
   for(i=1; i<argc || mode_interactif; i++) {
 
