@@ -1,5 +1,7 @@
 #include "divers.h"
+#include <dirent.h>
 #include "commandes_internes.h"
+#include "commandes_externes.h"
 
 t_bool	ActionECHO (parse_info *info, int debut, int nbArg) {
 
@@ -74,6 +76,9 @@ t_bool ActionCD (parse_info *info, int debut, int nbArg) {
       printf ("Impossible de changer vers le repertoire '%s' \n", def );
       return faux;
     }
+    else{
+      printf ("Repertoire changé vers : '%s' \n", def);
+    }
   } else {
 
     strcpy(dirName,"");
@@ -99,9 +104,55 @@ t_bool	ActionLS (parse_info *info, int debut, int nbArg) {
   (void) debut;
   (void) nbArg;
 
-  printf("Appel a actionLS (%s %d) a ecrire.\n",
+  printf("***********************LS***********************\n");
+
+
+  printf("----DEBUT INFO----\n");
+  printf("Nombre d'arguments : %d \n", info->nb_arg);
+  if ((info->nb_arg)>0)
+  {
+    for(int i=0; i<info->nb_arg;i++)
+    {
+      printf("Argument [%d] : %s\n",i, info->ligne_cmd[i]);
+    }
+  }
+  printf("----FIN INFO----\n");
+
+
+
+  
+
+  //printf("----DEBUT EXPLO----\n");
+
+  if ((info->nb_arg)==2)
+  {
+  DIR *d;
+  struct dirent *dir;
+  if ((info->nb_arg)>0)
+  d = opendir(info->ligne_cmd[1]);
+  if (d) {
+    while ((dir = readdir(d)) != NULL) {
+      printf("%s\n", dir->d_name);
+    }
+    closedir(d);
+  }
+  else{
+    printf("Aucune donnée trouvée !\n");
+  }
+  }else{
+    ActionEXEC (info,debut,nbArg);
+  }
+
+
+   //printf("----FIN EXPLO----\n");
+
+        /*int res = execvp(argv[1], argv);
+        (void) res; */
+
+  /*printf("Appel a actionLS (%s %d) a ecrire.\n",
 	 __FILE__,
-	 __LINE__);
+	 __LINE__);*/
+   printf("***********************LS***********************\n");
   
   return faux;
 }
