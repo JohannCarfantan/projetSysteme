@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 #define COMMENCE_PAR(a,b)	(strncmp((a), (b), strlen((b)))==0)
 #define EST_EGAL(a,b)    	(strlen((a))==strlen((b)) && COMMENCE_PAR((a),(b)))

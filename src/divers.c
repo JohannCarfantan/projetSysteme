@@ -65,6 +65,8 @@ t_bool ecrire_variable (char* nomVar, char* valeur) {
 	 __LINE__,
 	 nomVar,
 	 valeur);
+	setenv(nomVar,valeur,1);
+	printf("Resultat : %s\n",getenv(nomVar));
   return faux;
 }
 
