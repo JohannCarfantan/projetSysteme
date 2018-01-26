@@ -11,10 +11,10 @@ parse_info *parse(char *ligne_cmd)
 	char *tok;
 	int i;
 
-	/* L'appel calloc initialise à zéro la structure de données,
+	/* L'appel calloc initialise ï¿½ zï¿½ro la structure de donnï¿½es,
 	 * ainsi on est certain d'avoir des 'AUTRE' dans tout le tableau
 	 * modificateur.
-	 * La même remarque est valable pour les chemin entree et sortie. 
+	 * La mï¿½me remarque est valable pour les chemin entree et sortie. 
 	 */
 	info = calloc(1, sizeof(parse_info));
 
@@ -52,23 +52,25 @@ parse_info *parse(char *ligne_cmd)
 		}
 		else if (EST_EGAL(tok, "&"))
 		{
+			//printf("ArriÃ¨re plan detectÃ© \n");
 			info->modificateur[i] = ARRIERE_PLAN;
+			i++;
 		}
 		else if (EST_EGAL(tok, "#"))
 		{
 			/* Attention pour la prise en compte du commentaire : 
 			 * ... # commande en arriere plan
-			 * le commentaire doit être attaché à la suite
+			 * le commentaire doit ï¿½tre attachï¿½ ï¿½ la suite
 			 */
 			i++;
 			info->modificateur[i] = COMMENTAIRE;
-			strcpy(info->ligne_cmd[i], ""); /* on copie par défaut une chaine vide qui sera remplacée dans les itérations suivantes */
+			strcpy(info->ligne_cmd[i], ""); /* on copie par dï¿½faut une chaine vide qui sera remplacï¿½e dans les itï¿½rations suivantes */
 		}
 		else if (COMMENCE_PAR(tok, "#"))
 		{
 			/* Attention pour la prise en compte du commentaire : 
 			 * ... #commande en arriere plan
-			 * le commentaire doit être attaché au token courant
+			 * le commentaire doit ï¿½tre attachï¿½ au token courant
 			 */
 			i++;
 			info->modificateur[i] = COMMENTAIRE;
@@ -76,10 +78,10 @@ parse_info *parse(char *ligne_cmd)
 		}
 		else if (COMMENCE_PAR(tok, "%"))
 		{
-			/* Comme la substitution est faite directement, il est en réalité inutile
-			 * de marquer la chaîne comme une variable.
+			/* Comme la substitution est faite directement, il est en rï¿½alitï¿½ inutile
+			 * de marquer la chaï¿½ne comme une variable.
 			 * Ce ne serait pas le cas si on choisissait de faire la substitution de
-			 * la variable par sa valeur lors de l'interprétation de la commande
+			 * la variable par sa valeur lors de l'interprï¿½tation de la commande
 			 */
 
 			//info->modificateur[i] = VARIABLE;
@@ -89,7 +91,7 @@ parse_info *parse(char *ligne_cmd)
 		else
 		{
 			strcpy(info->ligne_cmd[i], tok);
-			if (info->modificateur[i] != COMMENTAIRE) /* pour le commentaire l'incrément de i est déjà réalisé */
+			if (info->modificateur[i] != COMMENTAIRE) /* pour le commentaire l'incrï¿½ment de i est dï¿½jï¿½ rï¿½alisï¿½ */
 				i++;
 		}
 
@@ -113,9 +115,9 @@ int detection_fin_commande(parse_info *info, int debut)
 					info->modificateur[i]!=TUBE && \
 					info->modificateur[i]!=COMMENTAIRE))
 	{
-		/* Les seuls éléments pouvant apparaître entre deux commandes
-		 * sont ceux d'exécution conditionnelle, de tube ou de
-		 * commentaire (ce qui vient après n'étant plus une commande)
+		/* Les seuls ï¿½lï¿½ments pouvant apparaï¿½tre entre deux commandes
+		 * sont ceux d'exï¿½cution conditionnelle, de tube ou de
+		 * commentaire (ce qui vient aprï¿½s n'ï¿½tant plus une commande)
 		 */
 		i++;
 	}
@@ -132,9 +134,9 @@ void affiche_parse_info(parse_info *info)
 		affiche_commande(info, i);
 		i = detection_fin_commande(info, i);
 
-		/* Les seuls éléments pouvant apparaître entre deux commandes
-		 * sont ceux d'exécution conditionnelle, de tube ou de
-		 * commentaire (ce qui vient après n'étant plus une commande)
+		/* Les seuls ï¿½lï¿½ments pouvant apparaï¿½tre entre deux commandes
+		 * sont ceux d'exï¿½cution conditionnelle, de tube ou de
+		 * commentaire (ce qui vient aprï¿½s n'ï¿½tant plus une commande)
 		 */
 		if (i<info->nb_arg && info->modificateur[i]==EXECUTION)
 		{
@@ -165,8 +167,8 @@ void affiche_commande(parse_info *info, int debut)
 	i = debut;
 	while (i<n)
 	{
-		/* Les seuls éléments pouvant apparaître dans une commande
-		 * sont ceux de redirection ou d'exécution en arrière-plan
+		/* Les seuls ï¿½lï¿½ments pouvant apparaï¿½tre dans une commande
+		 * sont ceux de redirection ou d'exï¿½cution en arriï¿½re-plan
 		 */
 		if (info->modificateur[i]==REDIRECTION_ENTREE)
 		{

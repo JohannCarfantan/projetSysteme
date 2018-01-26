@@ -29,7 +29,7 @@ void execution_ligne_cmd(parse_info *info) {
        * commande arg1 < redirection arg2
        * il s'agit a priori d'une erreur de syntaxe du shell
        */
-
+     // printf("info->modificateur[j] : %d \n ",info->modificateur[j]);
       switch(info->modificateur[j]) {
       case REDIRECTION_ENTREE:
 	strcpy(info->entree, info->ligne_cmd[j]);
@@ -39,6 +39,7 @@ void execution_ligne_cmd(parse_info *info) {
 	break;
       case ARRIERE_PLAN:
 	info->modificateur[i]=ARRIERE_PLAN;
+  //printf("info->modificateur[i] : %d \n ",info->modificateur[i]);
 	break;
       default:
 	nb_arg++;
