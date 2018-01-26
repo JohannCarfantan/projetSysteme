@@ -37,23 +37,24 @@ t_bool	ActionEXEC (parse_info *info, int debut, int nbArg) {
     printf("arg : %s \n", arg[i]);
     }
 
+    //Recupération fichier de sortie et d'entrée
     char *fileSortie = info->sortie;
-
     char *fileEntree = info->entree;
 
     printf("fileEntree %s \n",fileEntree);
     printf("fileSortie %s \n",fileSortie);
 
+    //Création d'un processus fils afin d'executer une commande externne
     pid_t pid_fils = fork();
     if ( pid_fils == -1) {
     perror ("Echec du fork 1\n");
     return EXIT_FAILURE;
     }
-    if( pid_fils ==0){
+    if( pid_fils ==0){ //Code qu'execute le processus fils
 
-      if(fileSortie!=NULL)
+      if(fileSortie!=NULL) //Si il y a un fichier en sortie '>'
       {
-      int fd = open(fileSortie, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR); //Redirection sortie Fichier
+      int fd = open(fileSortie, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR); //Ouverture fichier
 
       dup2(fd, 1);   // make stdout go to file
       dup2(fd, 2);   // make stderr go to file - you may choose to not do this
@@ -61,17 +62,18 @@ t_bool	ActionEXEC (parse_info *info, int debut, int nbArg) {
       close(fd);
       }
 
-      if(fileEntree!=NULL)
+      if(fileEntree!=NULL) //Si il y a un fichier en entrée '<'
       {
-      int fd = open(fileEntree, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR); //Redirection sortie Fichier
+      int fd = open(fileEntree, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR); //Redirection entrée Fichier
 
       dup2(fd, 0);   // stdin
 
       close(fd);
       }
 
+      //Execution commande externe avec tableau d'arguments 
       int res = execvp(*(&arg[0]),&arg[0]);
-      (void) res;
+      (void) res; //Code non utilisé 
       //printf("Res CE : %d \n", res);
 
     }
@@ -79,7 +81,7 @@ t_bool	ActionEXEC (parse_info *info, int debut, int nbArg) {
   //printf("execution d'une commande externe  (%s %d) a ecrire :\n%s\n", __FILE__, __LINE__, ligne);
 
 
-  if (premierPlan==1)
+  if (premierPlan==1) //Attend le processus fils et donc bloque le shell mais si aucune attente rique de processus zombie
   {
     wait(NULL);
   }

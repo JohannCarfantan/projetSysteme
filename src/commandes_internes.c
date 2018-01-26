@@ -17,6 +17,7 @@ t_bool	ActionECHO (parse_info *info, int debut, int nbArg) {
   sortie=stdout;
   printf("info->sortie : %s \n", info->sortie);
 
+  //Ouverture fichier de sortie '>'
   if (!EST_EGAL(info->sortie, ""))
   {
   sortie=fopen(info->sortie,"w");
@@ -37,12 +38,8 @@ t_bool	ActionECHO (parse_info *info, int debut, int nbArg) {
   {
   fclose(sortie);
   }
- 
 
   return vrai;
-
-
-
 }
 
 t_bool	ActionSET (parse_info *info, int debut, int nbArg) {
@@ -125,7 +122,7 @@ t_bool	ActionLS (parse_info *info, int debut, int nbArg) {
 
   printf("***********************LS***********************\n");
 
-
+  //Affichage des différentes informations récupérées (Arg)
   printf("----DEBUT INFO----\n");
   printf("Nombre d'arguments : %d \n", info->nb_arg);
   if ((info->nb_arg)>0)
@@ -143,6 +140,7 @@ t_bool	ActionLS (parse_info *info, int debut, int nbArg) {
 
   //printf("----DEBUT EXPLO----\n");
 
+  //Acces au dossier transmis en paramètre
   if ((info->nb_arg)==2)
   {
   DIR *d;
@@ -159,18 +157,10 @@ t_bool	ActionLS (parse_info *info, int debut, int nbArg) {
     printf("Aucune donnée trouvée !\n");
   }
   }else{
+    //Si plus de 2 arguments redirection vers commandes_externes
     ActionEXEC (info,debut,nbArg);
   }
 
-
-   //printf("----FIN EXPLO----\n");
-
-        /*int res = execvp(argv[1], argv);
-        (void) res; */
-
-  /*printf("Appel a actionLS (%s %d) a ecrire.\n",
-	 __FILE__,
-	 __LINE__);*/
    printf("***********************LS***********************\n");
   
   return faux;

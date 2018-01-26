@@ -45,7 +45,8 @@ int main (int argc, char *argv[]) {
        * fichiers en argument, un � un (argv[i]), puis interpreter leur contenu
        * dans la boucle suivante
        */
-
+      
+      //Si plus d'un argument on change la le fichier d'entrée par les fichiers en arguments
       entree = fopen ( argv[i], "r+b" );
       if( !entree ) perror("Impossible d'ouvrir le fichier"),exit(1);
     
