@@ -37,9 +37,12 @@ t_bool	ActionEXEC (parse_info *info, int debut, int nbArg) {
     printf("arg : %s \n", arg[i]);
     }
 
-    char *file = info->sortie;
+    char *fileSortie = info->sortie;
 
-    printf("File %s \n",file);
+    char *fileEntree = info->entree;
+
+    printf("fileEntree %s \n",fileEntree);
+    printf("fileSortie %s \n",fileSortie);
 
     pid_t pid_fils = fork();
     if ( pid_fils == -1) {
@@ -48,12 +51,21 @@ t_bool	ActionEXEC (parse_info *info, int debut, int nbArg) {
     }
     if( pid_fils ==0){
 
-      if(file!=NULL)
+      if(fileSortie!=NULL)
       {
-      int fd = open(file, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+      int fd = open(fileSortie, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR); //Redirection sortie Fichier
 
       dup2(fd, 1);   // make stdout go to file
       dup2(fd, 2);   // make stderr go to file - you may choose to not do this
+
+      close(fd);
+      }
+
+      if(fileEntree!=NULL)
+      {
+      int fd = open(fileEntree, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR); //Redirection sortie Fichier
+
+      dup2(fd, 0);   // stdin
 
       close(fd);
       }

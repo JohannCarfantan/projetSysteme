@@ -1,0 +1,18 @@
+total 168396
+drwxrwxr-x 3 julien julien      4096 sept. 30 10:12 Android
+drwxrwxr-x 8 julien julien      4096 juin   5  2017 android-studio
+drwxrwxr-x 4 julien julien      4096 sept. 30 10:20 AndroidStudioProjects
+drwxr-xr-x 2 julien julien      4096 janv. 22 10:15 Bureau
+-rw------- 1 julien julien 171737088 nov.  13 09:03 core
+drwxr-xr-x 8 julien julien      4096 janv. 25 10:06 Documents
+-rw-r--r-- 1 julien julien      8980 sept. 29 10:30 examples.desktop
+drwxr-xr-x 3 julien julien      4096 janv. 25 14:12 Images
+drwxr-xr-x 2 julien julien      4096 sept. 29 12:38 Modèles
+drwxr-xr-x 2 julien julien      4096 sept. 29 12:38 Musique
+lrwxrwxrwx 1 julien julien        38 nov.  14 09:32 PlayOnLinux's virtual drives -> /home/julien/.PlayOnLinux//wineprefix/
+drwxr-xr-x 2 julien julien      4096 sept. 29 12:38 Public
+-rw-rw-r-- 1 julien julien    579725 nov.  26 14:34 Scan_Pic0003.jpg
+drwxr-xr-x 7 julien julien      4096 déc.   6 13:58 supermeatboy
+drwxr-xr-x 4 julien julien     20480 janv. 25 15:14 Téléchargements
+drwxr-xr-x 3 julien julien      4096 nov.  25 14:51 Vidéos
+drwxrwxr-x 4 julien julien      4096 déc.  13 09:46 VirtualBox VMs
