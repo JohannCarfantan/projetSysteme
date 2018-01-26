@@ -15,15 +15,34 @@ t_bool	ActionECHO (parse_info *info, int debut, int nbArg) {
    */
 
   sortie=stdout;
+  printf("info->sortie : %s \n", info->sortie);
+
+  if (!EST_EGAL(info->sortie, ""))
+  {
+  sortie=fopen(info->sortie,"w");
+  if (sortie==NULL)
+  {
+    sortie = stdout;
+  }
+  } 
 
   i = 1;
   while(i<nbArg)	{
-    fprintf(sortie, "%s ", info->ligne_cmd[debut+i]);
+    fprintf(sortie, "%s", info->ligne_cmd[debut+i]);
     i++;
   }
   printf("\n");
 
+  if (sortie!=stdout)
+  {
+  fclose(sortie);
+  }
+ 
+
   return vrai;
+
+
+
 }
 
 t_bool	ActionSET (parse_info *info, int debut, int nbArg) {
