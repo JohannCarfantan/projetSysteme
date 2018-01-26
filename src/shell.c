@@ -17,6 +17,10 @@ int main (int argc, char *argv[]) {
   parse_info *info;
   t_bool mode_interactif = (argc==1);
 
+  // t_bool = 0 si plusieurs arguments (fichier.txt)
+
+  printf("Mode interactif %d \n", mode_interactif);
+
   if (mode_interactif) {
     lire_variable ("OS", verOS, sizeof (verOS));
     printf ("imrShell - %s\n", (char *) verOS);
@@ -34,12 +38,17 @@ int main (int argc, char *argv[]) {
       entree = stdin;
     }
     else {
+      
+
       /* Si le mode n'est pas interractif (il y a des arguments sur la ligne
        * de commande lors de l'appel au shell), alors il faut ouvrir les
        * fichiers en argument, un � un (argv[i]), puis interpreter leur contenu
        * dans la boucle suivante
        */
-      (void) argv;
+
+      entree = fopen ( argv[i], "r+b" );
+      if( !entree ) perror("Impossible d'ouvrir le fichier"),exit(1);
+    
     }
 
 

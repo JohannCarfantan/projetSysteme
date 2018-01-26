@@ -1,0 +1,2 @@
+echo Julien > script1.imr
+
