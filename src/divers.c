@@ -1,4 +1,6 @@
 #include "divers.h"
+#define KBLU  "\x1B[36m"
+#define KWHT  "\x1B[0m"
 
 void AfficheInvite() {
 
@@ -44,7 +46,7 @@ void AfficheInvite() {
 	}
       }
       else {
-	sprintf(var, "%c", invite[i]);
+	  sprintf(var, "%c", invite[i]);
       }
       strncat(chaine, var, CHAINE_MAX - strlen(chaine));
     }
@@ -54,19 +56,30 @@ void AfficheInvite() {
     strcpy(chaine, "$ ");
   }
 
-  printf ("%s", chaine);
+  //Ecriture dans stdout du répertoire courant car problème avec le code du haut 
+  dwRet = getcwd (var, sizeof (var));
+  if(dwRet!=NULL)
+  {
+   strcpy(chaine,dwRet);
+   strcat(chaine, "$ : ");
+  }
+  else{
+  strcpy(chaine, "$ ");
+  }
+
+  printf ("%s%s%s",KBLU ,chaine,KWHT);
   fflush (stdout);
 }
 
 t_bool ecrire_variable (char* nomVar, char* valeur) {
 
-  printf("Appel a ecrire_variable (%s %d) a ecrire avec \"%s\" et \"%s\". \n",
+ /* printf("Appel a ecrire_variable (%s %d) a ecrire avec \"%s\" et \"%s\". \n",
 	 __FILE__,
 	 __LINE__,
 	 nomVar,
-	 valeur);
+	 valeur);*/
 	setenv(nomVar,valeur,1);
-	printf("Resultat : %s\n",getenv(nomVar));
+	//printf("Resultat : %s\n",getenv(nomVar));
   return faux;
 }
 
@@ -75,17 +88,22 @@ t_bool lire_variable (char* nomVar, char* valeur, int taille) {
  	strcpy(valeur, "");
 
   if (nomVar != NULL) {
-    valeur = getenv(nomVar);
-    if (valeur == NULL) {
-      perror("getenv");
+    char* var = getenv(nomVar);
+    if (var == NULL) {
+     // perror("getenv");
+    }
+    else{
+      	strcpy(valeur, var);
     }
   }
+  
+  (void) taille;
 
-  printf("Appel a lire_variable (%s %d) a ecrire avec \"%s\", \"%s\" et %d. \n",
+  /*printf("Appel a lire_variable (%s %d) a ecrire avec \"%s\", \"%s\" et %d. \n",
 	 __FILE__,
 	 __LINE__,
 	 nomVar,
 	 valeur,
-	 taille);
+	 taille);*/
   return faux;
 }
