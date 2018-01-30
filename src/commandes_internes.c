@@ -15,7 +15,7 @@ t_bool	ActionECHO (parse_info *info, int debut, int nbArg) {
    */
 
   sortie=stdout;
-  printf("info->sortie : %s \n", info->sortie);
+  //printf("info->sortie : %s \n", info->sortie);
 
   //Ouverture fichier de sortie '>'
   if (!EST_EGAL(info->sortie, ""))
@@ -107,6 +107,9 @@ t_bool ActionCD (parse_info *info, int debut, int nbArg) {
       printf ("Impossible de changer vers le repertoire '%s'\n", dirName);
       return faux;
     }
+    else{
+      printf ("Repertoire changé vers : '%s' \n", dirName);
+    }
   }
   return vrai;
 
@@ -120,10 +123,10 @@ t_bool	ActionLS (parse_info *info, int debut, int nbArg) {
   (void) debut;
   (void) nbArg;
 
-  printf("***********************LS***********************\n");
+ // printf("***********************LS***********************\n");
 
   //Affichage des différentes informations récupérées (Arg)
-  printf("----DEBUT INFO----\n");
+ // printf("----DEBUT INFO----\n");
   printf("Nombre d'arguments : %d \n", info->nb_arg);
   if ((info->nb_arg)>0)
   {
@@ -132,7 +135,7 @@ t_bool	ActionLS (parse_info *info, int debut, int nbArg) {
       printf("Argument [%d] : %s\n",i, info->ligne_cmd[i]);
     }
   }
-  printf("----FIN INFO----\n");
+  //printf("----FIN INFO----\n");
 
 
 
@@ -161,7 +164,7 @@ t_bool	ActionLS (parse_info *info, int debut, int nbArg) {
     ActionEXEC (info,debut,nbArg);
   }
 
-   printf("***********************LS***********************\n");
+  // printf("***********************LS***********************\n");
   
   return faux;
 }

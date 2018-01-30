@@ -30,7 +30,7 @@ t_bool	ActionEXEC (parse_info *info, int debut, int nbArg) {
     //Premier plan = 1 si Premier plan
 
     printf("Premier plan : %d\n", premierPlan);
-    printf("Modificateur[debut] : %d\n", info->modificateur[debut]);
+    //printf("Modificateur[debut] : %d\n", info->modificateur[debut]);
 
     for (int i=0;i<nbArg;i++)
     {
@@ -41,8 +41,8 @@ t_bool	ActionEXEC (parse_info *info, int debut, int nbArg) {
     char *fileSortie = info->sortie;
     char *fileEntree = info->entree;
 
-    printf("fileEntree %s \n",fileEntree);
-    printf("fileSortie %s \n",fileSortie);
+    //printf("fileEntree %s \n",fileEntree);
+    //printf("fileSortie %s \n",fileSortie);
 
     //Création d'un processus fils afin d'executer une commande externne
     pid_t pid_fils = fork();
