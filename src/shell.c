@@ -33,6 +33,7 @@ int main (int argc, char *argv[]) {
 
   for(i=1; i<argc || mode_interactif; i++) {
 
+
     if (mode_interactif) {
       AfficheInvite ();
       entree = stdin;

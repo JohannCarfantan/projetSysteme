@@ -9,8 +9,8 @@ void AfficheInvite() {
   char var[CHAINE_MAX];
   size_t i;
   char * dwRet;
-
   if (lire_variable ("INV", invite, sizeof (invite))) {
+
 
     /* Format reconnu :
      * \u : remplace par l'utilisateur
@@ -56,6 +56,8 @@ void AfficheInvite() {
     strcpy(chaine, "$ ");
   }
 
+  //printf("%s",chaine);
+
   //Ecriture dans stdout du répertoire courant car problème avec le code du haut 
   dwRet = getcwd (var, sizeof (var));
   if(dwRet!=NULL)
@@ -66,6 +68,7 @@ void AfficheInvite() {
   else{
   strcpy(chaine, "$ ");
   }
+  
 
   printf ("%s%s%s",KBLU ,chaine,KWHT);
   fflush (stdout);
@@ -73,7 +76,7 @@ void AfficheInvite() {
 
 t_bool ecrire_variable (char* nomVar, char* valeur) {
 
- /* printf("Appel a ecrire_variable (%s %d) a ecrire avec \"%s\" et \"%s\". \n",
+  /*printf("Appel a ecrire_variable (%s %d) a ecrire avec \"%s\" et \"%s\". \n",
 	 __FILE__,
 	 __LINE__,
 	 nomVar,
@@ -85,7 +88,7 @@ t_bool ecrire_variable (char* nomVar, char* valeur) {
 
 t_bool lire_variable (char* nomVar, char* valeur, int taille) {
  
- 	strcpy(valeur, "");
+   strcpy(valeur, "");
 
   if (nomVar != NULL) {
     char* var = getenv(nomVar);

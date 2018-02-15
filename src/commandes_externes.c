@@ -26,6 +26,8 @@ t_bool	ActionEXEC (parse_info *info, int debut, int nbArg) {
 
     premierPlan = (info->modificateur[debut]!=ARRIERE_PLAN);
 
+    printf("Tube : %d\n", info->modificateur[debut+1]);
+
     //Premier plan = 0 si Arrière plan
     //Premier plan = 1 si Premier plan
 

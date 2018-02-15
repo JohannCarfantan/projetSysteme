@@ -6,5 +6,6 @@
 
 void execution_ligne_cmd(parse_info *info);
 t_bool execution_cmd(parse_info *info, int debut, int nb_arg);
+t_bool execution_cmdTube(parse_info *info, int debut, int nb_arg);
 
 #endif

@@ -25,7 +25,7 @@ t_bool	ActionECHO (parse_info *info, int debut, int nbArg) {
   {
     sortie = stdout;
   }
-  } 
+  }
 
   i = 1;
   while(i<nbArg)	{
@@ -86,7 +86,7 @@ t_bool ActionCD (parse_info *info, int debut, int nbArg) {
    * (le repertoire de destination contient des espaces)
    */
   if (nbArg == 1) {
-    
+
     lire_variable ("USERPROFILE", def, sizeof (def));
     if (chdir (def) == -1) {
       printf ("Impossible de changer vers le repertoire '%s' \n", def );
@@ -139,7 +139,7 @@ t_bool	ActionLS (parse_info *info, int debut, int nbArg) {
 
 
 
-  
+
 
   //printf("----DEBUT EXPLO----\n");
 
@@ -165,7 +165,6 @@ t_bool	ActionLS (parse_info *info, int debut, int nbArg) {
   }
 
   // printf("***********************LS***********************\n");
-  
+
   return faux;
 }
-
