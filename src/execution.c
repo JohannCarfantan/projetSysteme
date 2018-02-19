@@ -1,6 +1,7 @@
 #include "execution.h"
 #include "commandes_internes.h"
 #include "commandes_externes.h"
+#define TAILLE_MESSAGE 200
 
 void execution_ligne_cmd(parse_info *info) {
 
@@ -57,6 +58,8 @@ void execution_ligne_cmd(parse_info *info) {
       /* il faut traiter (par simplification uniquement pour deux commandes)
        * le cas de la communication via un tube
        */
+       execution_cmdPipe();
+       return;
     } else {
       resultat = execution_cmd(info, i, nb_arg);
     }
@@ -65,6 +68,7 @@ void execution_ligne_cmd(parse_info *info) {
       /* il suffit de sortir de la fonction, on est arrive a un commentaire
        * le reste de la ligne de commande n'est pas a traiter
        */
+       return;
     }
 
     /* a ce stade, on a le resultat de la commande, et on sait s'il faut traiter la commande
@@ -93,7 +97,11 @@ void execution_ligne_cmd(parse_info *info) {
        * i.e. ne sera pas executee
        */
       if (resultat) { /* si on doit passer a la commande suivante... */
-
+        while (j<info->nb_arg && \
+               (info->modificateur[j]!=EXECUTION && \
+          info->modificateur[j]!=EXECUTION_SI)) {
+          j++;
+        }
       }
       break;
     default :
@@ -119,4 +127,31 @@ t_bool execution_cmd(parse_info *info, int debut, int nb_arg)
   } else {
     return ActionEXEC (info, debut, nb_arg);
   }
+}
+
+void execution_cmdPipe(parse_info *info, int debut, int nb_arg)
+{
+    pid_t pid_fils;
+    pid_t pid_fils2;
+    int descripteurTube[2];
+    char messageEcrire[TAILLE_MESSAGE];
+    char messageLire[TAILLE_MESSAGE];
+    pipe(descripteurTube);
+    pid_fils = fork();
+    if(pid_fils != 0)
+    {
+        //ActionEXEC (info, debut, nb_arg);
+        sprintf(messageEcrire, "Bonjour, fils. Je suis ton père !");
+        write(descripteurTube[1], messageEcrire, TAILLE_MESSAGE);
+    }
+    else{
+      pid_fils2 = fork();
+      if(pid_fils2 != 0)
+      {
+        read(descripteurTube[0], messageLire, TAILLE_MESSAGE);
+        info->ligne_cmd[debut+1] = messageLire;
+        ActionEXEC (info, debut, nb_arg);
+        printf("Message reçu = \"%s\"", messageLire);
+      }
+    }
 }
