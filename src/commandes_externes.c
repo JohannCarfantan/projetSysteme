@@ -58,8 +58,8 @@ t_bool	ActionEXEC (parse_info *info, int debut, int nbArg) {
       {
       int fd = open(fileSortie, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR); //Ouverture fichier
 
-      dup2(fd, 1);   // make stdout go to file
-      dup2(fd, 2);   // make stderr go to file - you may choose to not do this
+      dup2(fd, 1);   
+      dup2(fd, 2);   
 
       close(fd);
       }
